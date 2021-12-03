@@ -5,6 +5,8 @@ This research work is carried out in the Post Graduate Program in Informátics f
 
 The preprint paper is available at: https://arxiv.org/abs/2111.06907.
 
+Our last results are available at: https://github.com/DanielEugenioNeves/COMPER-RELEASE-RESULTS
+
 It is a free publication to encourage discussions about the topics covered, but its official collaborators ask that the terms of license and rights be observed and respected.
 
 Any considerations, questions, and contributions, please let us know by danieleugenio.neves@gmail.com or daniel.eugenio@sga.pucminas.br.
