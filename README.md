@@ -1,5 +1,5 @@
 # COMPER-RELEASE
-This repository contains the source code of COMPER as part of our research work about transitions memories modeling to improve Experience Replay.
+This repository contains the source code of COMPER as part of our research work about Improving Experience Replay through Modeling of Similar Transitions' Sets.
 
 This research work is carried out in the Post Graduate Program in Informátics from the Pontifical Catholic University of Minas Gerais (PUC Minas). It was financed in part by the Coordenacão de Aperfeiçoamento de Pessoal de Nível Superior – Brasil (CAPES) – Finance Code 001. It has also received partial funding from Brazilian Conselho Nacional de Desenvolvimento Científico e Tecnológico (CNPq) and from Pontifical Catholic University of Minas Gerais (PUC Minas).
 
