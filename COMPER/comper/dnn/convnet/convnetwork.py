@@ -30,20 +30,20 @@ class ConvNet(object):
     
     def __create_staked_frames_convnet(self,input_shape,output_dim):
         self.convnet = tf.keras.Sequential([            
-            tf.keras.layers.Conv2D(32,(8,8),strides=(4,4),data_format="channels_last",input_shape=input_shape,use_bias=False,name="Conv1"),
-            tf.keras.layers.Conv2D(64, (4,4),strides=(2,2),use_bias=False,name="Conv2"),
-            tf.keras.layers.Conv2D(64, (3,3),strides=(1,1),use_bias=False,name="Conv3"),
+            tf.keras.layers.Conv2D(32,(8,8),strides=(4,4),activation='relu',data_format="channels_last",input_shape=input_shape,use_bias=False,name="Conv1"),
+            tf.keras.layers.Conv2D(64, (4,4),strides=(2,2),activation='relu',use_bias=False,name="Conv2"),
+            tf.keras.layers.Conv2D(64, (3,3),strides=(1,1),activation='relu',use_bias=False,name="Conv3"),
             tf.keras.layers.Flatten(name="Flatten"),
-            tf.keras.layers.Dense(512,use_bias=False,name="Dense512"),
+            tf.keras.layers.Dense(512,activation='relu',use_bias=False,name="Dense512"),
             tf.keras.layers.Dense(output_dim,activation=None,name="DenseOut")
         ])
     def __create_single_frame_convnet(self,input_shape,output_dim):
         self.convnet = tf.keras.Sequential([            
-            tf.keras.layers.Conv2D(32,(8,8),strides=(4,4),data_format="channels_last",input_shape=input_shape,name="Conv1"),
-            tf.keras.layers.Conv2D(64, (4,4),strides=(2,2),name="Conv2"),
-            tf.keras.layers.Conv2D(64, (3,3),strides=(1,1),name="Conv3"),
+            tf.keras.layers.Conv2D(32,(8,8),strides=(4,4),activation='relu',data_format="channels_last",input_shape=input_shape,name="Conv1"),
+            tf.keras.layers.Conv2D(64, (4,4),strides=(2,2),activation='relu',use_bias=False,name="Conv2"),
+            tf.keras.layers.Conv2D(64, (3,3),strides=(1,1),activation='relu',use_bias=False,name="Conv3"),
             tf.keras.layers.Flatten(name="Flatten"),
-            tf.keras.layers.Dense(512,name="Dense512"),
+            tf.keras.layers.Dense(512,activation='relu',use_bias=False,name="Dense512"),
             tf.keras.layers.Dense(output_dim,activation=None,name="DenseOut")
         ])
 
