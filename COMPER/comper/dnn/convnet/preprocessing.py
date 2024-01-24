@@ -1,6 +1,4 @@
 import numpy as np
-from PIL import Image
-from scipy import ndimage
 import cv2
 #import tensorflow as tf
 from comper.config.transitions import FrameTransition as ft

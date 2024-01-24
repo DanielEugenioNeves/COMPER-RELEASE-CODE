@@ -1,26 +1,17 @@
-import numpy as np
-import keras
-from keras.models import Sequential,Model,Input
-from keras.layers import Dense, Dropout, Flatten,Activation,Reshape
-from keras.layers import Conv2D, MaxPooling2D
-from keras.optimizers import RMSprop
-from keras.utils import plot_model
 import tensorflow as tf
 import numpy as np
-import keras.backend as K
 import os
 from comper.config.transitions import FrameTransition as ft
 from comper.config.transitions import FrameTransitionTypes as ft_types
 from comper.config import parameters as param
 from comper.config.exceptions import ExceptionRunType
-#sess = tf.Session()
-#K.set_session(sess)
+
 class ConvNet(object):
     def __init__(self,netparamsdir='./',run_type=param.RunType.TRAIN):
         self.paramsidr = netparamsdir
         self.run_type = run_type
         self.convnet = {}
-        self.optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.00025,decay=0.95,momentum=0.95)
+        self.optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.00025)
     
     def create(self,input_shape,output_dim=18):
         if(ft.TYPE == ft_types.STAKED_FRAMES):

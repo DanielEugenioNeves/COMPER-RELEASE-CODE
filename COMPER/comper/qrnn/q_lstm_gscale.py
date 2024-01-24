@@ -1,18 +1,10 @@
 
 import numpy as np
-from matplotlib import pyplot
-import pandas as pand
 from pandas import DataFrame
 from pandas import concat
 import math
-from keras.models import Sequential
-from keras.layers import Dense
-from keras.layers import LSTM
 from sklearn.metrics import mean_squared_error
 from sklearn.preprocessing import MinMaxScaler
-import click
-import array
-import os
 
 from comper.data import lstm_logger
 from comper.qrnn.rnn import RNN

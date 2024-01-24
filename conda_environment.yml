@@ -1,4 +1,4 @@
-name: tese_environment3
+name: comper_ale
 channels:
   - pytorch
   - defaults
@@ -135,4 +135,4 @@ dependencies:
     - imageio==2.9.0
     - packaging==21.0
     - tf-keras-vis==0.7.2
-prefix: /home/daniel/miniconda3/envs/tese_environment3
+

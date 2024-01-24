@@ -25,7 +25,7 @@ from comper.config.optimize import TensorFlowSettings
 def main(rom,logdir, logfreq, net_param_dir, upd_target_freq, upd_q_freq,save_param_frq, lr_start_it, memorydir, 
         maxtotalframes,frames_ep_decay,persist_memories,no_save_params,framesmode):
      
-    rom_file = str.encode("/home/"+getpass.getuser()+"/workspace/COMPER/COMPER/rom/"+rom+".bin")    
+    rom_file = str.encode("/home/"+getpass.getuser()+"/COMPER-RELEASE-CODE/COMPER/rom/"+rom+".bin")    
     agent = Agent(rom_name = rom,                  
                   rom_file_path=rom_file,
                   maxtotalframes=maxtotalframes,
