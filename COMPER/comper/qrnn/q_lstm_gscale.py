@@ -127,6 +127,22 @@ class QLSTMGSCALE(object):
             print(type(e),e)            
             raise(e)
 
+    def get_only_train_data(self,data):
+        n_train = int(((100 * self.transitions_real_batch_size)/100))
+        train = data[0:n_train, :]
+        train_X = train[:, :-1]
+        train_y = train[:, -1]
+        if(self.verbose):
+            print("\n (train_X, train_y), (test_X, test_y)")
+            print(train_X.shape, train_y.shape)
+            
+        train_X = train_X.reshape((train_X.shape[0], 1, train_X.shape[1]))
+        
+        if(self.verbose):
+           print("\n after reshape train_X and test_X")
+           print(train_X.shape, train_y.shape)
+        return train_X, train_y 
+    
     # Called in train_q_prediction: step 3
     def get_train_test_sets(self, data):
         n_train = int(((60 * self.transitions_real_batch_size)/100))
@@ -175,14 +191,28 @@ class QLSTMGSCALE(object):
         
         transition_features = self.__load_transition_featrues_from_memory()           
         
-        train_X, train_y, test_X, test_y = self.get_train_test_sets(transition_features.values)
+        #train_X, train_y, test_X, test_y = self.get_train_test_sets(transition_features.values)
+        #history = self.lstm.fit(train_X, train_y, epochs=n_epochs, batch_size=b_size, validation_data=(
+        #                        test_X, test_y), verbose=self.verbose, shuffle=False)
         
-        history = self.lstm.fit(train_X, train_y, epochs=n_epochs, batch_size=b_size, validation_data=(
-                                test_X, test_y), verbose=self.verbose, shuffle=False)
+        train_X, train_y = self.get_only_train_data(transition_features.values)
+        history = self.lstm.fit(train_X, train_y, epochs=n_epochs, batch_size=b_size, verbose=self.verbose, shuffle=False)
         
-        self.prepare_train_log(history,test_X,test_y)
-        self.LogLstmTrainHistoy()
+        
+        
+        #self.prepare_train_log(history,test_X,test_y)
+        self.prepare_only_train_log(history)
+        #self.LogLstmTrainHistoy()
+        self.LogLstm_only_TrainHistoy()
         self.reduce_transition_memory()
+    
+    def prepare_only_train_log(self,history):
+        if(self.logTrain):
+            tlh = history.history['loss']
+            #vlh = history.history['val_loss']
+            self.train_loss_history.extend(tlh)
+            #self.train_val_loss_history.extend(vlh)            
+            #self.train_q_prediction_evaluate(test_X,test_y)
     
     def prepare_train_log(self,history,test_X,test_y):
         if(self.logTrain):
@@ -220,6 +250,14 @@ class QLSTMGSCALE(object):
             print(type(e),e)
             raise(e)
    
+    
+    def LogLstm_only_TrainHistoy(self):
+        if(self.logTrain and self.logDir != ""):
+            for i in range(0, len(self.train_loss_history)):
+                lstm_logger.logkv("TrainCount", self.trainPredictionCount)
+                lstm_logger.logkv('MeanTrainLoss', self.train_loss_history[i])               
+                lstm_logger.dumpkvs()
+    
     def LogLstmTrainHistoy(self):
         if(self.logTrain and self.logDir != ""):
             for i in range(0, len(self.train_loss_history)):
