@@ -1,9 +1,6 @@
-import sys
-from random import randrange
 import click
 import getpass
 from comper.agents.train_agent import Agent
-from comper.config.optimize import TensorFlowSettings
 
 
 @click.command()
