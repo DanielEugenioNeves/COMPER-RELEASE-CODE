@@ -43,6 +43,8 @@ def main(rom,logdir, logfreq, net_param_dir, upd_target_freq, upd_q_freq,save_pa
                     save_networks_weigths=not no_save_params,                  
                     framesmode = framesmode)
         agent.train_agent()
+        count+=1
+        del agent
    
 
 if __name__ == "__main__":
