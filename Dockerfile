@@ -21,6 +21,7 @@ RUN sudo apt-get --assume-yes install libosmesa6-dev
 RUN sudo apt-get --assume-yes install libc-dev
 RUN sudo pip install patchelf
 RUN sudo apt-get --assume-yes install htop
+RUN sudo apt-get --assume-yes install --reinstall libsdl1.2debian
 # ********************************************************
 # * Anything else you want to do like clean up goes here *
 # ********************************************************
@@ -32,8 +33,8 @@ COPY . .
 RUN 
 RUN sudo chown -R $USERNAME /home/$USERNAME/COMPER-RELEASE-CODE
 RUN pip install faiss-gpu
-RUN pip install click=8.0.1
-RUN pip install opencv=3.4.2
-RUN pip install pandas=1.2.5
-RUN pip install pillow=8.3.1
+RUN pip install click
+RUN pip install opencv-python
+RUN pip install pandas
+RUN pip install pillow
 RUN pip install scikit-learn
