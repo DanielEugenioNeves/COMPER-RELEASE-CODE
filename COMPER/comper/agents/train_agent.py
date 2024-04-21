@@ -256,7 +256,7 @@ class Agent(BaseTrainAgent):
             self.__save_states(itr)                
     
     def __save_states(self,itr):
-        if((itr+1) % self.save_states_freq == 0 ):
+        if(self.save_states_freq>0 and ((itr+1) % self.save_states_freq == 0 )):
             if(self.save_networks_weigths):
                 self.q.save_weights()
                 self.qt.save_weights()                         

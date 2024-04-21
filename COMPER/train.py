@@ -10,7 +10,7 @@ from comper.agents.train_agent import Agent
 @click.option("--net_param_dir", type=str, default='dev',show_default=True)
 @click.option("--upd_target_freq", type=int, default=100,show_default=True)
 @click.option("--upd_q_freq", type=int, default=4,show_default=True)
-@click.option("--save_param_frq", type=int, default=1000,show_default=True)
+@click.option("--save_param_frq", type=int, default=0,show_default=True)
 @click.option("--lr_start_it", type=int, default=100,show_default=True)
 @click.option("--memorydir", type=str, default='dev',show_default=True)
 @click.option("--maxtotalframes", type=int, default=100000,show_default=True)
