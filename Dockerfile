@@ -21,6 +21,7 @@ RUN sudo apt-get --assume-yes install libosmesa6-dev
 RUN sudo apt-get --assume-yes install libc-dev
 RUN sudo pip install patchelf
 RUN sudo apt-get --assume-yes install htop
+RUN sudo apt-get update --fix-missing
 RUN sudo apt-get --assume-yes install --reinstall libsdl1.2debian
 # ********************************************************
 # * Anything else you want to do like clean up goes here *
