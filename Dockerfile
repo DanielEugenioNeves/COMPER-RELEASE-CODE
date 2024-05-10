@@ -31,10 +31,11 @@ RUN sudo apt-get --assume-yes install git
 
 # [Optional] Set the default user. Omit if you want to keep the default as root.
 USER $USERNAME
-WORKDIR /home/$USERNAME/COMPER-RELEASE-CODE
+#WORKDIR /home/$USERNAME/COMPER-RELEASE-CODE
 ##COPY . .
-
+WORKDIR /home/$USERNAME/
 RUN git clone https://$GIT_TOKEN@github.com/DanielEugenioNeves/COMPER-RELEASE-CODE.git
+
 RUN sudo chown -R $USERNAME /home/$USERNAME/COMPER-RELEASE-CODE
 RUN pip install faiss-gpu
 RUN pip install click
