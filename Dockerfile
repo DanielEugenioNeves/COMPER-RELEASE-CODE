@@ -6,6 +6,7 @@ FROM nvcr.io/nvidia/tensorflow:23.04-tf2-py3
 ARG USERNAME=daniel
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
+ARG GIT_TOKEN
 
 # Create the user
 RUN groupadd --gid $USER_GID $USERNAME \
@@ -23,6 +24,7 @@ RUN sudo pip install patchelf
 RUN sudo apt-get --assume-yes install htop
 RUN sudo apt-get update --fix-missing
 RUN sudo apt-get --assume-yes install --reinstall libsdl1.2debian
+RUN sudo apt-get --assume-yes install git
 # ********************************************************
 # * Anything else you want to do like clean up goes here *
 # ********************************************************
@@ -30,8 +32,9 @@ RUN sudo apt-get --assume-yes install --reinstall libsdl1.2debian
 # [Optional] Set the default user. Omit if you want to keep the default as root.
 USER $USERNAME
 WORKDIR /home/$USERNAME/COMPER-RELEASE-CODE
-COPY . .
-RUN 
+##COPY . .
+
+RUN git clone https://$GIT_TOKEN@github.com/DanielEugenioNeves/COMPER-RELEASE-CODE.git
 RUN sudo chown -R $USERNAME /home/$USERNAME/COMPER-RELEASE-CODE
 RUN pip install faiss-gpu
 RUN pip install click
