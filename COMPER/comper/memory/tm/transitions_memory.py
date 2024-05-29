@@ -4,12 +4,14 @@ from collections import deque
 from comper.memory.similarity.faiss_index import FaissIndex
 from comper.memory.tm.transitions_set import TSet
 from comper.memory.base.base_transitions_memory import BaseTransitionsMemory
+from comper.data import memory_logger
 
 class TransitionsMemory(BaseTransitionsMemory):
-    def __init__(self,max_size,name,memory_dir='./'):
+    def __init__(self,max_size,name,memory_dir='./',log_dir=None):
         self.faissidx ={}        
         self.t_set ={}
-        self.tmax = max_size               
+        self.tmax = max_size
+        self.log_dir = log_dir               
         
         super().__init__(name,memory_dir='./')       
         self.__initialize()
@@ -17,12 +19,18 @@ class TransitionsMemory(BaseTransitionsMemory):
     def __initialize(self):
         self.__init_faiss()
         self.__init_tset()
+        self.__config_logger()
 
     def __init_faiss(self):
         self.faissidx = FaissIndex(max_transitions=self.tmax,transition_length=self.tlen-2)
 
     def __init_tset(self):
         self.t_set = TSet(max_sets=self.tmax)
+        
+    def __config_logger(self):
+        if(self.log_dir != None):
+            self.log_dir = self.log_dir+"/memory"
+            memory_logger.session(self.log_dir).__enter__()
 
     def __len__(self):
         return self.t_set.len()   
@@ -38,9 +46,17 @@ class TransitionsMemory(BaseTransitionsMemory):
         
     def __exist_simillar_transition(self,t):        
         d,i = self.faissidx.get_sim_transition(t)
-        exist = True if d[0][0]>=0.000000 and d[0][0]<=0.000100 else False            
+        exist = True if d[0][0]>=0.000000 and d[0][0]<=0.000100 else False
+        if(exist):
+           self.__log_simmillar_transition(d[0][0],i[0][0])                    
         return exist,i[0][0]   
 
+    def __log_simmillar_transition(self,distance,index):
+        memory_logger.logkv("Distance", distance)
+        memory_logger.logkv('Index', index)               
+        memory_logger.dumpkvs()
+        
+    
     def add_transition(self,s_t_1,a_t_1,r_t,s_t,q_t,done):
         t = self.__shape_transition(s_t_1,a_t_1,r_t,s_t,q_t,done)
         _t = t[:-2]

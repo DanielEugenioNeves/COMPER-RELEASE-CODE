@@ -64,7 +64,7 @@ class Agent(BaseTrainAgent):
 
 
     def __config_memories(self):               
-        self.tm = TM(max_size=100000,name="tm", memory_dir=self.memory_dir)
+        self.tm = TM(max_size=100000,name="tm", memory_dir=self.memory_dir,log_dir=self.logDir)
         self.rtm  = RTM(max_size=100000,name="rtm",memory_dir=self.memory_dir)
             
     def __config_environment(self):
