@@ -17,7 +17,7 @@ from comper.agents.train_agent import Agent
 @click.option("--frames_ep_decay", type=int, default=90000,show_default=True)
 @click.option("--persist_memories", is_flag=True,show_default=True)
 @click.option("--no_save_params", is_flag=True,show_default=True)
-@click.option('--framesmode', type=click.Choice(['single', 'staked'], case_sensitive=False),default='staked',show_default=True)
+@click.option('--framesmode', type=click.Choice(['single', 'staked'], case_sensitive=False),default='single',show_default=True)
 
 def main(rom,logdir, logfreq, net_param_dir, upd_target_freq, upd_q_freq,save_param_frq, lr_start_it, memorydir, 
         maxtotalframes,frames_ep_decay,persist_memories,no_save_params,framesmode):
