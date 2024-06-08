@@ -46,7 +46,7 @@ class TransitionsMemory(BaseTransitionsMemory):
         
     def __exist_simillar_transition(self,t):        
         d,i = self.faissidx.get_sim_transition(t)
-        exist = True if d[0][0]>=0.000000 and d[0][0]<=0.000100 else False
+        exist = True if d[0][0]>=0.000000 and d[0][0]<=0.00100 else False
         if(exist):
            self.__log_simmillar_transition(d[0][0],i[0][0])                    
         return exist,i[0][0]   
